@@ -648,3 +648,37 @@ footer {
         background-attachment: scroll;
     }
 }
+
+.join-form{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-width:500px;
+  margin-top:20px;
+}
+
+.join-form input,
+.join-form select{
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #444;
+}
+
+.join-form button{
+  cursor:pointer;
+}
+.join-form {
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.join-form input,
+.join-form select,
+.join-form button {
+  width: 100%;
+}

@@ -59,6 +59,48 @@ export default function VlsiSociety() {
     ? { href: FORM_LINK, target: "_blank", rel: "noopener noreferrer" }
     : { href: "#", onClick: (e) => { e.preventDefault(); alert("Add your Google Form link in FORM_LINK at the top of the file."); } };
 
+    const handleSubmit = async (e) => {
+  e.preventDefault();
+
+const form = e.target;
+
+const formData = {
+  name: form.name.value,
+  rollNumber: form.rollNumber.value,
+  phoneNumber: form.phoneNumber.value,
+  branch: form.branch.value,
+  teamPreference1: form.teamPreference1.value,
+  teamPreference2: form.teamPreference2.value
+};
+
+  if (!/^\d{10}$/.test(formData.phoneNumber)) {
+    alert("Phone Number must be exactly 10 digits");
+    return;
+  }
+
+  try {
+    await fetch(
+      "https://script.google.com/macros/s/AKfycby8eMNgu_UYjJV5_U0sp2Xx4fqQF9Jm3_d9IvGZhWOqmF-NwEDhG8b-rG-ubzgFVwVn/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+
+    alert("Form Submitted Successfully!");
+    e.target.reset();
+
+  } catch (error) {
+    console.error(error);
+    alert("Submission Failed");
+  }
+};
+
+
   return (
     <div className="app" style={{ "--seminar-photo": img(SEMINAR_PHOTO) }}>
 
@@ -190,7 +232,75 @@ export default function VlsiSociety() {
       <div className="final">
         <div className="wrap">
           <h2>Tape out<br />with us.</h2>
-          <a className="btn" {...joinProps}>Fill the Google Form</a>
+          <form onSubmit={handleSubmit} className="join-form">
+
+  <input
+    type="text"
+    name="name"
+    placeholder="Name"
+    required
+  />
+
+  <input
+    type="text"
+    name="rollNumber"
+    placeholder="Roll Number"
+    required
+  />
+
+  <input
+    type="tel"
+    name="phoneNumber"
+    placeholder="Phone Number"
+    pattern="[0-9]{10}"
+    required
+  />
+
+  <select name="branch" required>
+    <option value="">Select Branch</option>
+    <option value="VLSI">VLSI</option>
+    <option value="ECE">ECE</option>
+    <option value="IIOT">IIOT</option>
+  </select>
+
+  <select name="teamPreference1" required>
+    <option value="">Select Team preference 1</option>
+    <option value="Tech Team">Tech Team</option>
+    <option value="Design and Social Media Team">
+      Design and Social Media Team
+    </option>
+    <option value="Documentation Team">
+      Documentation Team
+    </option>
+    <option value="Management Team">
+      Management Team
+    </option>
+    <option value="Outreach Team">
+      Outreach Team
+    </option>
+  </select>
+  <select name="teamPreference2" required>
+    <option value="">Select Team preference 2</option>
+    <option value="Tech Team">Tech Team</option>
+    <option value="Design and Social Media Team">
+      Design and Social Media Team
+    </option>
+    <option value="Documentation Team">
+      Documentation Team
+    </option>
+    <option value="Management Team">
+      Management Team
+    </option>
+    <option value="Outreach Team">
+      Outreach Team
+    </option>
+  </select>
+
+  <button type="submit" className="btn">
+    Submit
+  </button>
+
+</form>
         </div>
       </div>
       <footer>{SOCIETY_NAME}, {COLLEGE}</footer>
