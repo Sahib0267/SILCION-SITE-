@@ -1,0 +1,650 @@
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap");
+
+/* ==========================================================
+   Base and theme
+   ========================================================== */
+.app {
+    --bg: #090d14;
+    --panel: #111826;
+    --line: #233044;
+    --text: #eaf0f7;
+    --mute: #93a4b8;
+    --cu: #f0a95a;
+    --poly: #ff5c7a;
+    --diff: #3ddc97;
+    --m1: #5b9dff;
+    --vio: #b388ff;
+    --disp: "Unbounded", system-ui, sans-serif;
+    --sans: "Instrument Sans", system-ui, sans-serif;
+
+    background: var(--bg);
+    color: var(--text);
+    font: 400 1rem/1.6 var(--sans);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+@media (prefers-color-scheme: light) {
+    .app {
+        --bg: #f3f5f9;
+        --panel: #fff;
+        --line: #d5dde8;
+        --text: #121a26;
+        --mute: #506174;
+    }
+}
+
+.app * {
+    box-sizing: border-box;
+}
+
+.app a {
+    color: inherit;
+}
+
+.app :focus-visible {
+    outline: 2px solid var(--cu);
+    outline-offset: 3px;
+}
+
+.wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 22px;
+}
+
+.app section {
+    padding: 90px 0;
+}
+
+.h {
+    font: 800 clamp(1.8rem, 4.5vw, 3rem) / 1.05 var(--disp);
+    letter-spacing: -0.04em;
+    margin: 0 0 12px;
+}
+
+.sub {
+    color: var(--mute);
+    max-width: 54ch;
+    margin: 0 0 40px;
+}
+
+/* ==========================================================
+   Buttons
+   ========================================================== */
+.btn {
+    display: inline-block;
+    font: 600 0.9rem var(--disp);
+    background: var(--cu);
+    color: #1b1206 !important;
+    padding: 15px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 0 -2px rgba(240, 169, 90, 0.35);
+}
+
+.btn.ghost {
+    background: transparent;
+    color: var(--text) !important;
+    border: 1.5px solid currentColor;
+}
+
+/* ==========================================================
+   Navigation
+   ========================================================== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: linear-gradient(var(--bg), transparent);
+}
+
+nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.logo {
+    font: 800 0.95rem var(--disp);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+nav ul {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: var(--mute);
+}
+
+nav ul a:hover {
+    color: var(--text);
+}
+
+@media (max-width: 760px) {
+    nav ul {
+        display: none;
+    }
+}
+
+/* ==========================================================
+   Hero and wafer
+   ========================================================== */
+.hero {
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 110px 0 60px;
+}
+
+.hero .wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 20px;
+    align-items: center;
+}
+
+h1 {
+    font: 800 clamp(2.4rem, 7vw, 5.2rem) / 0.98 var(--disp);
+    letter-spacing: -0.045em;
+    margin: 0 0 22px;
+}
+
+h1 span {
+    display: block;
+    background: linear-gradient(90deg, var(--m1), var(--vio), var(--poly), var(--cu));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.lede {
+    max-width: 46ch;
+    color: var(--mute);
+    font-size: 1.1rem;
+    margin: 0 0 30px;
+}
+
+.cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.wafer {
+    width: min(86vw, 520px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    position: relative;
+    justify-self: center;
+    background: conic-gradient(from var(--a), #5b9dff, #b388ff, #ff7aa8, #f0a95a, #3ddc97, #5b9dff);
+    animation: hue 14s linear infinite;
+    box-shadow:
+        0 0 0 10px var(--bg),
+        0 0 0 11px var(--line),
+        0 40px 120px -30px rgba(179, 136, 255, 0.55);
+}
+
+/* die grid */
+.wafer::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0 1.5px, transparent 1.5px 36px),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0 1.5px, transparent 1.5px 36px);
+    -webkit-mask: radial-gradient(circle, #000 62%, rgba(0, 0, 0, 0.5) 100%);
+    mask: radial-gradient(circle, #000 62%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* wafer flat notch */
+.wafer::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -1px;
+    width: 70px;
+    height: 16px;
+    transform: translateX(-50%);
+    background: var(--bg);
+    border-radius: 60px 60px 0 0;
+}
+
+.wafer b {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font: 800 clamp(1rem, 3vw, 1.5rem) / 1.2 var(--disp);
+    color: #fff;
+    mix-blend-mode: overlay;
+    text-align: center;
+}
+
+@keyframes hue {
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@media (max-width: 820px) {
+    .hero .wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .wafer {
+        margin-top: 20px;
+    }
+}
+
+/* ==========================================================
+   Marquee
+   ========================================================== */
+.mq {
+    border-block: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--panel);
+}
+
+.mq div {
+    display: flex;
+    width: max-content;
+    animation: mq 30s linear infinite;
+    font: 600 1.1rem var(--disp);
+    padding: 16px 0;
+}
+
+.mq span {
+    padding: 0 28px;
+    white-space: nowrap;
+}
+
+.mq span:nth-child(4n + 1) {
+    color: var(--cu);
+}
+
+.mq span:nth-child(4n + 2) {
+    color: var(--m1);
+}
+
+.mq span:nth-child(4n + 3) {
+    color: var(--diff);
+}
+
+.mq span:nth-child(4n) {
+    color: var(--poly);
+}
+
+@keyframes mq {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ==========================================================
+   Seminar
+   ========================================================== */
+.sem {
+    position: relative;
+    min-height: 90vh;
+    display: grid;
+    align-items: end;
+    color: #fff;
+    padding: 0 !important;
+    background:
+        linear-gradient(180deg, rgba(9, 13, 20, 0.55), rgba(9, 13, 20, 0.92)),
+        var(--seminar-photo),
+        radial-gradient(circle at 70% 20%, #3b2a73, #0b1226 60%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.sem .wrap {
+    padding-block: 90px 70px;
+}
+
+.tag {
+    display: inline-block;
+    background: var(--poly);
+    color: #fff;
+    font: 600 0.8rem var(--disp);
+    padding: 6px 14px;
+    border-radius: 999px;
+    transform: rotate(-3deg);
+    margin-bottom: 18px;
+}
+
+.sem h2 {
+    font: 800 clamp(2.2rem, 6.5vw, 5rem) / 1 var(--disp);
+    letter-spacing: -0.045em;
+    margin: 0 0 22px;
+    max-width: 15ch;
+}
+
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 0 30px;
+    padding: 0;
+    list-style: none;
+}
+
+.facts li {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+}
+
+.facts b {
+    display: block;
+    font: 600 0.75rem var(--disp);
+    color: var(--cu);
+}
+
+/* ==========================================================
+   Gallery
+   ========================================================== */
+.gal {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.ph {
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+        var(--img),
+        conic-gradient(from var(--r) at 50% 50%, var(--c1), var(--c2), var(--c1));
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s;
+}
+
+.ph:nth-child(odd) {
+    transform: rotate(-2deg);
+}
+
+.ph:nth-child(even) {
+    transform: rotate(2deg) translateY(18px);
+}
+
+.ph:hover {
+    transform: rotate(0) scale(1.03);
+    z-index: 2;
+}
+
+.ph i {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: var(--bg);
+    color: var(--text);
+    font: 600 0.75rem var(--disp);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-style: normal;
+}
+
+@media (max-width: 700px) {
+    .gal {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==========================================================
+   Logic gate playground
+   ========================================================== */
+.play {
+    background: var(--panel);
+    border-block: 1px solid var(--line);
+}
+
+.pg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.ctl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.ctl button {
+    font: 600 0.85rem var(--disp);
+    padding: 11px 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.ctl button[aria-pressed="true"] {
+    background: var(--m1);
+    border-color: var(--m1);
+    color: #06101f;
+}
+
+.led {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font: 800 1.5rem var(--disp);
+}
+
+.led i {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #2a3446;
+    transition: 0.2s;
+}
+
+.led i.on {
+    background: var(--diff);
+    box-shadow: 0 0 36px var(--diff);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font: 600 0.95rem var(--disp);
+}
+
+td,
+th {
+    padding: 12px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+}
+
+th {
+    color: var(--mute);
+    font-size: 0.75rem;
+}
+
+tr.hit td {
+    background: color-mix(in srgb, var(--diff) 25%, transparent);
+}
+
+/* ==========================================================
+   Roadmap / layer stack
+   ========================================================== */
+.ls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.stack {
+    position: relative;
+    height: 380px;
+    perspective: 1000px;
+}
+
+.layer {
+    position: absolute;
+    left: 50%;
+    width: min(60vw, 250px);
+    aspect-ratio: 1;
+    margin-left: calc(min(60vw, 250px) / -2);
+    border-radius: 14px;
+    transform: rotateX(62deg) rotateZ(-38deg);
+    opacity: 0.92;
+    transition: transform 0.35s;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 14px),
+        var(--c);
+}
+
+.layer:nth-child(2) {
+    top: 70px;
+}
+
+.layer:nth-child(3) {
+    top: 140px;
+}
+
+.layer:nth-child(4) {
+    top: 210px;
+}
+
+.layer:hover {
+    transform: rotateX(62deg) rotateZ(-38deg) translateZ(30px);
+}
+
+.steps div {
+    padding: 16px 0 16px 20px;
+    border-left: 6px solid var(--c);
+}
+
+.steps h3 {
+    font: 800 1.15rem var(--disp);
+    margin: 0 0 4px;
+}
+
+.steps p {
+    margin: 0;
+    color: var(--mute);
+}
+
+/* ==========================================================
+   Team
+   ========================================================== */
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
+}
+
+.pp {
+    text-align: center;
+    width: 130px;
+}
+
+.pp div {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    background: conic-gradient(var(--m1), var(--vio), var(--poly), var(--cu), var(--m1));
+    display: grid;
+    place-items: center;
+    font: 800 1.2rem var(--disp);
+    color: #fff;
+}
+
+.pp span {
+    display: block;
+    color: var(--mute);
+    font-size: 0.85rem;
+}
+
+/* ==========================================================
+   Final call to action and footer
+   ========================================================== */
+.final {
+    text-align: center;
+    padding: 120px 0;
+    background: radial-gradient(circle at 50% 120%, rgba(179, 136, 255, 0.35), transparent 60%);
+}
+
+.final h2 {
+    font: 800 clamp(2.4rem, 9vw, 7rem) / 0.95 var(--disp);
+    letter-spacing: -0.05em;
+    margin: 0 0 30px;
+}
+
+footer {
+    text-align: center;
+    color: var(--mute);
+    padding: 26px;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+}
+
+/* ==========================================================
+   Responsive: stacked layouts (placed after .pg and .ls so it wins)
+   ========================================================== */
+@media (max-width: 760px) {
+
+    .pg,
+    .ls {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   Reduced motion
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+    .wafer,
+    .mq div {
+        animation: none;
+    }
+
+    .app {
+        scroll-behavior: auto;
+    }
+
+    .sem {
+        background-attachment: scroll;
+    }
+}
