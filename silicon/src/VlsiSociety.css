@@ -649,6 +649,8 @@ footer {
     }
 }
 
+
+/* form css */
 .join-form{
   display:flex;
   flex-direction:column;
@@ -681,4 +683,8 @@ footer {
 .join-form select,
 .join-form button {
   width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }

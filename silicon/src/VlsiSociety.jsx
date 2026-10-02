@@ -115,7 +115,7 @@ const formData = {
             <li><a href="#play">Playground</a></li>
             <li><a href="#roadmap">Roadmap</a></li>
           </ul>
-          <a className="btn" {...joinProps}>Join us</a>
+          <a className="btn" href  = '#join'>Join us</a>
         </div>
       </nav>
 
@@ -125,7 +125,7 @@ const formData = {
             <h1>Where silicon<span>gets its start.</span></h1>
             <p className="lede">The college society for people who want to design chips. Learn Verilog, build on FPGAs, and take a design from code to layout with us.</p>
             <div className="cta">
-              <a className="btn" {...joinProps}>Join the society</a>
+              <a className="btn" href = '#join'>Join the society</a>
               <a className="btn ghost" href="#seminar">Next seminar</a>
             </div>
           </div>
@@ -230,7 +230,7 @@ const formData = {
         </div>
       </section>
 
-      <div className="final">
+      <div className="final" id = "join">
         <div className="wrap">
           <h2>Tape out<br />with us.</h2>
           <form onSubmit={handleSubmit} className="join-form">
