@@ -685,6 +685,11 @@ footer {
   width: 100%;
 }
 
+.whatsapp-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }

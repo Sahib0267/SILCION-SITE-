@@ -47,6 +47,7 @@ export default function VlsiSociety() {
   const [b, setB] = useState(0);
   const [gate, setGate] = useState("AND");
   const [angle, setAngle] = useState(0);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const move = (e) => setAngle((e.clientX / window.innerWidth) * 360);
@@ -92,7 +93,9 @@ const formData = {
       }
     );
 
+    
     alert("Form Submitted Successfully!");
+    setSubmitted(true);
     e.target.reset();
 
   } catch (error) {
@@ -300,6 +303,20 @@ const formData = {
   <button type="submit" className="btn">
     Submit
   </button>
+  {submitted && (
+  <button
+    type="button"
+    className="btn whatsapp-btn"
+    onClick={() =>
+      window.open(
+        "https://chat.whatsapp.com/IoybZ4l4BX8H0JpmTjSQoX?s=cl&p=a&ilr=4&iam=0",
+        "_blank"
+      )
+    }
+  >
+    Join WhatsApp Group
+  </button>
+)}
 
 </form>
         </div>
