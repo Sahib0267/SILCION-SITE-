@@ -79,6 +79,7 @@ const formData = {
   }
 
   try {
+    console.log(formData);
     await fetch(
       "https://script.google.com/macros/s/AKfycby8eMNgu_UYjJV5_U0sp2Xx4fqQF9Jm3_d9IvGZhWOqmF-NwEDhG8b-rG-ubzgFVwVn/exec",
       {
